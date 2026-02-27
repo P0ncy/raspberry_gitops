@@ -20,9 +20,6 @@ metadata:
   namespace: envoy-gateway-system
 spec:
   interval: 1h
-  dependsOn:
-    - name: envoy-gateway-crds
-      namespace: flux-system
   chart:
     spec:
       chart: gateway-helm
