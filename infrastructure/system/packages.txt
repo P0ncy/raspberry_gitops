@@ -1,0 +1,7 @@
+# Packages à installer sur le Pi
+curl
+git
+docker.io
+docker-compose
+htop
+vim
