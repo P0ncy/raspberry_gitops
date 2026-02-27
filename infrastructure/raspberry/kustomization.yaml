@@ -20,4 +20,4 @@ patches:
     patch: |-
       - op: replace
         path: /spec/addresses/0/value
-        value: "192.168.1.100"   # TODO: mettre l'IP réelle du Pi
+        value: "192.168.1.21"   # TODO: mettre l'IP réelle du Pi
