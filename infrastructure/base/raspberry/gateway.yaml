@@ -5,6 +5,11 @@ metadata:
   name: envoy
 spec:
   controllerName: gateway.envoyproxy.io/gatewayclass-controller
+  parametersRef:
+    group: gateway.envoyproxy.io
+    kind: EnvoyProxy
+    name: raspberry-proxy
+    namespace: envoy-gateway-system
 ---
 # Gateway principale - écoute HTTP et HTTPS sur l'IP du Pi
 apiVersion: gateway.networking.k8s.io/v1
@@ -16,7 +21,7 @@ spec:
   gatewayClassName: envoy
   addresses:
     - type: IPAddress
-      value: "${RASPBERRY_IP}"   # remplacer par l'IP du Pi
+      value: "${RASPBERRY_IP}"
   listeners:
     - name: http
       protocol: HTTP
@@ -35,16 +40,3 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
----
-# Patch GatewayClass pour référencer notre EnvoyProxy custom
-apiVersion: gateway.networking.k8s.io/v1
-kind: GatewayClass
-metadata:
-  name: envoy
-spec:
-  controllerName: gateway.envoyproxy.io/gatewayclass-controller
-  parametersRef:
-    group: gateway.envoyproxy.io
-    kind: EnvoyProxy
-    name: raspberry-proxy
-    namespace: envoy-gateway-system
