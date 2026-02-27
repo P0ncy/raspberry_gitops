@@ -9,9 +9,6 @@ metadata:
   name: envoy-gateway
   namespace: envoy-gateway-system
 spec:
-  dependsOn:
-    - name: gateway-api-crds
-      namespace: flux-system
   interval: 24h
   url: https://charts.gateway.envoyproxy.io
 ---
@@ -21,15 +18,12 @@ metadata:
   name: envoy-gateway
   namespace: envoy-gateway-system
 spec:
+  interval: 1h
   dependsOn:
     - name: gateway-api-crds
       namespace: flux-system
-  interval: 1h
   chart:
     spec:
-  dependsOn:
-    - name: gateway-api-crds
-      namespace: flux-system
       chart: gateway-helm
       version: ">=1.0.0"
       sourceRef:
