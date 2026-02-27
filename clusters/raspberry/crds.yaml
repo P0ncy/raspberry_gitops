@@ -12,3 +12,4 @@ spec:
   path: ./infrastructure/base/raspberry/crds
   wait: true
   timeout: 3m
+  force: true
