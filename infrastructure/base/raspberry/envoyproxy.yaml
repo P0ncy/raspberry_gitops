@@ -8,10 +8,7 @@ spec:
     type: Kubernetes
     kubernetes:
       envoyService:
-        type: NodePort
-        nodePort:
-          http: 30080
-          https: 30443
+        type: LoadBalancer    # k3s ServiceLB bind sur l'IP du Pi
       envoyDeployment:
         replicas: 1
         container:

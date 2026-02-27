@@ -1,11 +1,12 @@
-# Installation des CRDs Gateway API (prérequis Envoy Gateway)
+# CRDs Gateway API - installées via URL officielle (compatible k3s)
 apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: OCIRepository
+kind: HelmRepository
 metadata:
   name: gateway-api-crds
   namespace: flux-system
 spec:
   interval: 24h
+  type: oci
   url: oci://ghcr.io/kubernetes-sigs/gateway-api/gateway-api-crds
   ref:
     tag: v1.2.1
@@ -19,7 +20,8 @@ spec:
   interval: 10m
   prune: false
   sourceRef:
-    kind: OCIRepository
-    name: gateway-api-crds
+    kind: GitRepository
+    name: flux-system
+  path: ./infrastructure/base/raspberry/crds
   wait: true
   timeout: 2m
