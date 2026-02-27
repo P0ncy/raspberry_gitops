@@ -2,7 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../base/raspberry/namespace.yaml
-  - ../base/raspberry/gateway-api-crds.yaml
   - ../base/raspberry/envoy-gateway.yaml
   - ../base/raspberry/envoyproxy.yaml
   - ../base/raspberry/gateway.yaml

@@ -1,16 +1,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: infrastructure
+  name: crds
   namespace: flux-system
 spec:
   interval: 10m
+  prune: false
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./infrastructure/raspberry
-  prune: true
+  path: ./infrastructure/base/raspberry/crds
   wait: true
-  timeout: 5m
-  dependsOn:
-    - name: crds
+  timeout: 3m
