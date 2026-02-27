@@ -2,3 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../base/raspberry/namespace.yaml
+  - ../base/raspberry/envoy-gateway.yaml
+configMapGenerator:
+  - name: envoy-gateway-values
+    namespace: envoy-gateway-system
+    files:
+      - values.yaml=envoy-gateway-values.yaml
+configurations:
+  - ../base/raspberry/kustomizeconfig.yaml

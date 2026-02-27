@@ -1,0 +1,16 @@
+# Envoy Gateway - values adaptées Raspberry Pi (ARM64)
+deployment:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+
+config:
+  envoyGateway:
+    logging:
+      level:
+        default: warn
