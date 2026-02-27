@@ -2,32 +2,37 @@
 
 Infrastructure as Code pour Raspberry Pi, géré via **Flux CD**.
 
-## Architecture
+## Structure
 
 ```
-raspberry_gitops/
-├── apps/               # Applications déployées (Docker Compose)
-├── flux/               # Configuration Flux CD
-│   ├── sources/        # Sources Git/Helm
-│   ├── kustomizations/ # Kustomizations Flux
-│   └── helmreleases/   # Helm Releases
-├── infrastructure/     # Configuration système
-│   ├── system/         # Packages, configs OS
-│   └── docker/         # Config Docker globale
-└── scripts/            # Scripts utilitaires
-    ├── bootstrap.sh    # Init Flux sur le Pi
-    ├── sync.sh         # Sync manuelle
-    └── rollback.sh     # Rollback dernière version
+.
+├── clusters/
+│   └── raspberry-pi/
+│       └── infrastructure.yaml     # Point d'entrée Flux pour le cluster
+└── infrastructure/
+    ├── base/
+    │   └── raspberry-pi/           # Manifestes de base (réutilisables)
+    │       ├── kustomizeconfig.yaml
+    │       ├── namespace.yaml
+    │       └── prometheus.yaml
+    └── raspberry-pi/               # Overlay spécifique au Pi
+        ├── kustomization.yaml
+        └── prometheus-values.yaml  # Valeurs custom (ressources limitées)
 ```
 
-## Démarrage rapide
+## Pattern
+
+- `clusters/<cluster>/` → Flux lit ce dossier au bootstrap
+- `infrastructure/base/` → Manifestes génériques réutilisables
+- `infrastructure/<cluster>/` → Surcharges spécifiques à l'environnement
+
+## Bootstrap
 
 ```bash
-# 1. Bootstrap Flux sur le Pi
-bash scripts/bootstrap.sh
-
-# 2. Sync manuelle
-bash scripts/sync.sh
+flux bootstrap github \
+  --owner=P0ncy \
+  --repository=raspberry_gitops \
+  --branch=main \
+  --path=clusters/raspberry-pi \
+  --personal
 ```
-
-Flux surveille ce repo toutes les **60 secondes** et applique les changements automatiquement.

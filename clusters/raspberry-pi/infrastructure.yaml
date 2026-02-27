@@ -5,8 +5,10 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: ./infrastructure
-  prune: true
   sourceRef:
     kind: GitRepository
-    name: raspberry-gitops
+    name: flux-system
+  path: ./infrastructure/raspberry-pi
+  prune: true
+  wait: true
+  timeout: 5m

@@ -1,0 +1,27 @@
+# Valeurs Prometheus adaptées Raspberry Pi (ressources limitées)
+grafana:
+  enabled: true
+  adminPassword: changeme
+  service:
+    type: NodePort
+    nodePort: 30080
+
+prometheus:
+  prometheusSpec:
+    retention: 7d
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 100m
+      limits:
+        memory: 512Mi
+        cpu: 500m
+
+alertmanager:
+  enabled: false
+
+nodeExporter:
+  enabled: true
+
+kubeStateMetrics:
+  enabled: true
