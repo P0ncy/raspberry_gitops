@@ -3,6 +3,8 @@ kind: Kustomization
 resources:
   - ../base/raspberry/namespace.yaml
   - ../base/raspberry/envoy-gateway.yaml
+  - ../base/raspberry/envoyproxy.yaml
+  - ../base/raspberry/gateway.yaml
 configMapGenerator:
   - name: envoy-gateway-values
     namespace: envoy-gateway-system
@@ -10,3 +12,12 @@ configMapGenerator:
       - values.yaml=envoy-gateway-values.yaml
 configurations:
   - ../base/raspberry/kustomizeconfig.yaml
+
+patches:
+  - target:
+      kind: Gateway
+      name: raspberry-gateway
+    patch: |-
+      - op: replace
+        path: /spec/addresses/0/value
+        value: "192.168.1.100"   # TODO: mettre l'IP réelle du Pi
