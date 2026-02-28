@@ -20,6 +20,8 @@ spec:
     extraEnv:
       - name: JELLYSEERR_URL_BASE
         value: "/jellyseerr"
+    podSecurityContext:
+      fsGroup: 0
     config:
       persistence:
         existingClaim: jellyseerr-config
