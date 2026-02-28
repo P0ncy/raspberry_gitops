@@ -19,5 +19,5 @@ spec:
               type: ReplacePrefixMatch
               replacePrefixMatch: /
       backendRefs:
-        - name: jellyseerr-app
+        - name: jellyseerr-seerr-chart
           port: 5055
