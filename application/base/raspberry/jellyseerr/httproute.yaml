@@ -11,7 +11,13 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: /
+            value: /jellyseerr
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
       backendRefs:
         - name: jellyseerr
           port: 5055

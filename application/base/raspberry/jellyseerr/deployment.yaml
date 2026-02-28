@@ -18,6 +18,9 @@ spec:
           image: fallenbagel/jellyseerr:latest
           ports:
             - containerPort: 5055
+          env:
+            - name: JELLYSEERR_URL_BASE
+              value: "/jellyseerr"
           volumeMounts:
             - name: config
               mountPath: /app/config
