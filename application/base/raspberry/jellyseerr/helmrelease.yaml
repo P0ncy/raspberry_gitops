@@ -19,7 +19,7 @@ spec:
         containers:
           app:
             image:
-              repository: fallenbagel/jellyseerr
+              repository: seerr/seerr
               tag: latest
             env:
               JELLYSEERR_URL_BASE: "/jellyseerr"
