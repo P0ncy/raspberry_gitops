@@ -1,0 +1,43 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: jellyseerr
+  namespace: jellyseerr
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: app-template
+      version: "3.x"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      jellyseerr:
+        containers:
+          app:
+            image:
+              repository: fallenbagel/jellyseerr
+              tag: latest
+            env:
+              JELLYSEERR_URL_BASE: "/jellyseerr"
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
+    service:
+      app:
+        controller: jellyseerr
+        ports:
+          http:
+            port: 5055
+    persistence:
+      config:
+        existingClaim: jellyseerr-config
+        globalMounts:
+          - path: /app/config

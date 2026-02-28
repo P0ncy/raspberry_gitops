@@ -19,5 +19,5 @@ spec:
               type: ReplacePrefixMatch
               replacePrefixMatch: /
       backendRefs:
-        - name: jellyseerr
+        - name: jellyseerr-app
           port: 5055
