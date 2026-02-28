@@ -29,6 +29,12 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+    - name: seerr
+      protocol: HTTP
+      port: 5055
+      allowedRoutes:
+        namespaces:
+          from: All
     - name: https
       protocol: HTTPS
       port: 443

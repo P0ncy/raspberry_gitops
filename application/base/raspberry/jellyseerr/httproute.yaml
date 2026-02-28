@@ -7,17 +7,12 @@ spec:
   parentRefs:
     - name: raspberry-gateway
       namespace: envoy-gateway-system
+      sectionName: seerr
   rules:
     - matches:
         - path:
             type: PathPrefix
-            value: /jellyseerr
-      filters:
-        - type: URLRewrite
-          urlRewrite:
-            path:
-              type: ReplacePrefixMatch
-              replacePrefixMatch: /
+            value: /
       backendRefs:
         - name: jellyseerr-seerr-chart
           port: 5055
