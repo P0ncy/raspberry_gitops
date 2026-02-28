@@ -7,37 +7,29 @@ spec:
   interval: 10m
   chart:
     spec:
-      chart: app-template
-      version: "3.x"
+      chart: ./charts/seerr-chart
       sourceRef:
-        kind: HelmRepository
-        name: bjw-s
+        kind: GitRepository
+        name: seerr
         namespace: flux-system
   values:
-    controllers:
-      jellyseerr:
-        containers:
-          app:
-            image:
-              repository: seerr/seerr
-              tag: latest
-            env:
-              JELLYSEERR_URL_BASE: "/jellyseerr"
-            resources:
-              requests:
-                cpu: 100m
-                memory: 128Mi
-              limits:
-                cpu: 500m
-                memory: 512Mi
-    service:
-      app:
-        controller: jellyseerr
-        ports:
-          http:
-            port: 5055
-    persistence:
-      config:
+    image:
+      registry: ghcr.io
+      repository: seerr-team/seerr
+      tag: ""
+    extraEnv:
+      - name: JELLYSEERR_URL_BASE
+        value: "/jellyseerr"
+    config:
+      persistence:
         existingClaim: jellyseerr-config
-        globalMounts:
-          - path: /app/config
+    service:
+      type: ClusterIP
+      port: 5055
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi

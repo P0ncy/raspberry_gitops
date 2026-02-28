@@ -7,41 +7,31 @@ spec:
   interval: 10m
   chart:
     spec:
-      chart: app-template
-      version: "3.x"
+      chart: jellyfin
+      version: "2.x"
       sourceRef:
         kind: HelmRepository
-        name: bjw-s
+        name: jellyfin
         namespace: flux-system
   values:
-    controllers:
-      jellyfin:
-        containers:
-          app:
-            image:
-              repository: jellyfin/jellyfin
-              tag: latest
-            env:
-              JELLYFIN_PublishedServerUrl: "http://192.168.1.21"
-            resources:
-              requests:
-                cpu: 200m
-                memory: 256Mi
-              limits:
-                cpu: 2000m
-                memory: 1Gi
-    service:
-      app:
-        controller: jellyfin
-        ports:
-          http:
-            port: 8096
+    image:
+      tag: latest
+    env:
+      TZ: Europe/Paris
+      JELLYFIN_PublishedServerUrl: "http://192.168.1.21"
     persistence:
       config:
+        enabled: true
         existingClaim: jellyfin-config
-        globalMounts:
-          - path: /config
       media:
+        enabled: true
         existingClaim: jellyfin-media
-        globalMounts:
-          - path: /media
+    resources:
+      requests:
+        cpu: 200m
+        memory: 256Mi
+      limits:
+        cpu: 2000m
+        memory: 1Gi
+    service:
+      type: ClusterIP
