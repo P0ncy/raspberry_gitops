@@ -25,7 +25,6 @@ spec:
               TZ: Europe/Paris
               PUID: "1000"
               PGID: "1000"
-              TRANSMISSION_WEB_HOME: /flood-for-transmission/
             resources:
               requests:
                 cpu: 100m
