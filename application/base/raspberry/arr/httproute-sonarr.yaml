@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: sonarr
+  namespace: arr
+spec:
+  parentRefs:
+    - name: raspberry-gateway
+      namespace: envoy-gateway-system
+      sectionName: sonarr
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: sonarr-app
+          port: 8989

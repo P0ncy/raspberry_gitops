@@ -4,3 +4,4 @@ resources:
   - ../base/raspberry/sources
   - ../base/raspberry/jellyfin
   - ../base/raspberry/jellyseerr
+  - ../base/raspberry/arr

@@ -1,0 +1,53 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: sonarr
+  namespace: arr
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: app-template
+      version: "3.x"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      sonarr:
+        containers:
+          app:
+            image:
+              repository: lscr.io/linuxserver/sonarr
+              tag: latest
+            env:
+              TZ: Europe/Paris
+              PUID: "1000"
+              PGID: "1000"
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
+    service:
+      app:
+        controller: sonarr
+        ports:
+          http:
+            port: 8989
+    persistence:
+      config:
+        existingClaim: sonarr-config
+        globalMounts:
+          - path: /config
+      media:
+        existingClaim: arr-media
+        globalMounts:
+          - path: /media
+      downloads:
+        existingClaim: arr-downloads
+        globalMounts:
+          - path: /downloads

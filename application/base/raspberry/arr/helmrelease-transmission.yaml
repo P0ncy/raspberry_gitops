@@ -1,0 +1,50 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: transmission
+  namespace: arr
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: app-template
+      version: "3.x"
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controllers:
+      transmission:
+        containers:
+          app:
+            image:
+              repository: lscr.io/linuxserver/transmission
+              tag: latest
+            env:
+              TZ: Europe/Paris
+              PUID: "1000"
+              PGID: "1000"
+              TRANSMISSION_WEB_HOME: /flood-for-transmission/
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
+    service:
+      app:
+        controller: transmission
+        ports:
+          http:
+            port: 9091
+    persistence:
+      config:
+        existingClaim: transmission-config
+        globalMounts:
+          - path: /config
+      downloads:
+        existingClaim: arr-downloads
+        globalMounts:
+          - path: /downloads

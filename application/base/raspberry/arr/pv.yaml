@@ -1,0 +1,54 @@
+# PV statique partagé avec Jellyfin (même hostPath que jellyfin-media)
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: arr-media-pv
+spec:
+  capacity:
+    storage: 50Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  claimRef:
+    name: arr-media
+    namespace: arr
+  local:
+    path: /var/lib/rancher/k3s/storage/pvc-2eb7d022-9dc9-4509-9fed-5d1b8ee17aa8_jellyfin_jellyfin-media
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - poncy
+---
+# PV pour les téléchargements Transmission (répertoire créé automatiquement)
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: arr-downloads-pv
+spec:
+  capacity:
+    storage: 100Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  claimRef:
+    name: arr-downloads
+    namespace: arr
+  hostPath:
+    path: /var/lib/arr/downloads
+    type: DirectoryOrCreate
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - poncy

@@ -35,6 +35,30 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+    - name: sonarr
+      protocol: HTTP
+      port: 8989
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: radarr
+      protocol: HTTP
+      port: 7878
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: prowlarr
+      protocol: HTTP
+      port: 9696
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: transmission
+      protocol: HTTP
+      port: 9091
+      allowedRoutes:
+        namespaces:
+          from: All
     - name: https
       protocol: HTTPS
       port: 443

@@ -1,0 +1,71 @@
+# Stockage partagé - média (lié au PV statique arr-media-pv)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: arr-media
+  namespace: arr
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: ""
+  volumeName: arr-media-pv
+  resources:
+    requests:
+      storage: 50Gi
+---
+# Stockage partagé - téléchargements
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: arr-downloads
+  namespace: arr
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: ""
+  volumeName: arr-downloads-pv
+  resources:
+    requests:
+      storage: 100Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sonarr-config
+  namespace: arr
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: radarr-config
+  namespace: arr
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prowlarr-config
+  namespace: arr
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: transmission-config
+  namespace: arr
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi
