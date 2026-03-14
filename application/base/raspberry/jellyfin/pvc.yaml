@@ -16,6 +16,8 @@ metadata:
   namespace: jellyfin
 spec:
   accessModes: [ReadWriteOnce]
+  storageClassName: ""
+  volumeName: jellyfin-media-pv
   resources:
     requests:
-      storage: 50Gi
+      storage: 400Gi

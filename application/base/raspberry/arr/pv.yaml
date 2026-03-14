@@ -1,11 +1,11 @@
-# PV statique partagé avec Jellyfin (même hostPath que jellyfin-media)
+# PV statique média - disque SAMSUNG externe
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: arr-media-pv
 spec:
   capacity:
-    storage: 50Gi
+    storage: 400Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -15,7 +15,7 @@ spec:
     name: arr-media
     namespace: arr
   local:
-    path: /var/lib/rancher/k3s/storage/pvc-2eb7d022-9dc9-4509-9fed-5d1b8ee17aa8_jellyfin_jellyfin-media
+    path: /media/poncy/SAMSUNG
   nodeAffinity:
     required:
       nodeSelectorTerms:
