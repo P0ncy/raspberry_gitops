@@ -33,6 +33,10 @@ spec:
         cpu: 500m
         memory: 512Mi
     livenessProbe:
-      initialDelaySeconds: 30
+      initialDelaySeconds: 60
+      timeoutSeconds: 10
+      failureThreshold: 5
     readinessProbe:
-      initialDelaySeconds: 30
+      initialDelaySeconds: 60
+      timeoutSeconds: 10
+      failureThreshold: 5
