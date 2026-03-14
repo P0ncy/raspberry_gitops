@@ -5,3 +5,4 @@ resources:
   - ../base/raspberry/jellyfin
   - ../base/raspberry/jellyseerr
   - ../base/raspberry/arr
+  - ../base/raspberry/tailscale
