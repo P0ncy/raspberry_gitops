@@ -10,7 +10,7 @@ spec:
   volumeName: arr-media-pv
   resources:
     requests:
-      storage: 50Gi
+      storage: 400Gi
 ---
 # Stockage partagé - téléchargements
 apiVersion: v1
