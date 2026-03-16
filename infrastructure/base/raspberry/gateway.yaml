@@ -59,6 +59,12 @@ spec:
       allowedRoutes:
         namespaces:
           from: All
+    - name: jellyfin
+      protocol: HTTP
+      port: 8096
+      allowedRoutes:
+        namespaces:
+          from: All
     - name: https
       protocol: HTTPS
       port: 443
