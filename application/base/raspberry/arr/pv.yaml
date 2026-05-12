@@ -42,7 +42,7 @@ spec:
     name: arr-downloads
     namespace: arr
   hostPath:
-    path: /var/lib/arr/downloads
+    path: /mnt/media/downloads
     type: DirectoryOrCreate
   nodeAffinity:
     required:
