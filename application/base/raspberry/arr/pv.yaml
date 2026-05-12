@@ -1,4 +1,4 @@
-# PV statique média - disque SAMSUNG externe
+# PV statique média - disque Seagate externe
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -15,7 +15,7 @@ spec:
     name: arr-media
     namespace: arr
   local:
-    path: /media/poncy/SAMSUNG
+    path: /mnt/media
   nodeAffinity:
     required:
       nodeSelectorTerms:
