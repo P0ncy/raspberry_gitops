@@ -1,0 +1,17 @@
+# Override DNS pour c411.org
+# Le routeur bloque ce domaine (résolution vers 127.0.0.1/::1)
+# On force la résolution vers la vraie IP Cloudflare depuis les pods
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  c411.server: |
+    c411.org:53 {
+      hosts {
+        188.114.96.12 c411.org
+        fallthrough
+      }
+      forward . /etc/resolv.conf
+    }
