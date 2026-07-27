@@ -25,6 +25,8 @@ spec:
               TZ: Europe/Paris
               PUID: "1000"
               PGID: "1000"
+              TRANSMISSION_RPC_WHITELIST_ENABLED: "false"
+              TRANSMISSION_RPC_HOST_WHITELIST_ENABLED: "false"
             resources:
               requests:
                 cpu: 100m
